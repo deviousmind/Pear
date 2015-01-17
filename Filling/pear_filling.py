@@ -9,7 +9,7 @@ class PearFilling():
     def create_pairs(self, available_people, cannot_pairs):
         number_people = len(available_people)
         if number_people <= 1:
-            return available_people
+            return [available_people]
         pairs = self.generate_compatible_pairs(available_people, cannot_pairs)
         return pairs
 

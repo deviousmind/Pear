@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     print('')
 
-    cannot_pair_input = input('Who cannot pair today? (input pairs as [person_one, person_two]\n')
+    cannot_pair_input = input('Who cannot pair today? (surround incompatible pairs with [])\n')
     cannot_pair = spatula.get_pairs(cannot_pair_input)
 
     print('')

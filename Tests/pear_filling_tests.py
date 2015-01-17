@@ -58,7 +58,7 @@ class PearFillingTests(unittest.TestCase):
 
     def test_create_pairs_returns_empty_list_if_pair_cannot_be_made(self):
         pairs = self.Pear.create_pairs([], [])
-        self.assertEqual(pairs, [])
+        self.assertEqual(pairs, [[]])
 
     def test_ripen_pairs_returns_true_if_pair_not_in_cannot_pairs(self):
         ripe = self.Pear.ripen_pairs(['one', 'two'], ['three', 'four'])
