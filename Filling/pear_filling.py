@@ -8,6 +8,8 @@ class PearFilling():
 
     def create_pairs(self, available_people, cannot_pairs):
         number_people = len(available_people)
+        if number_people <= 1:
+            return available_people
         max_pairs = number_people // 2
         people = list(available_people)
         paired = False

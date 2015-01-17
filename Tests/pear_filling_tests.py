@@ -55,6 +55,10 @@ class PearFillingTests(unittest.TestCase):
         pairs = self.Pear.create_pairs(['can', 'not'], [['can', 'not']])
         self.assertEqual(pairs[0], ['can', 'not'])
 
+    def test_create_pairs_returns_empty_list_if_pair_cannot_be_made(self):
+        pairs = self.Pear.create_pairs([], [])
+        self.assertEqual(pairs, [])
+
 
 
 
