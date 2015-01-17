@@ -1,8 +1,12 @@
+import re
+
+
 class Spatula:
 
     @staticmethod
     def get_people(raw_text):
-        return [x.strip() for x in raw_text.split(' ')]
+        people = re.findall(r"[\w']+", raw_text)
+        return people
 
     def get_pairs(self, raw_text):
         if len(raw_text) == 0:

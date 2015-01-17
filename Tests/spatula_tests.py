@@ -13,6 +13,10 @@ class SpatulaTests(unittest.TestCase):
         people = self.Spatula.get_people("one two three")
         self.assertEqual(people, ['one', 'two', 'three'])
 
+    def test_get_people_extracts_list_from_comma_separated_string(self):
+        people = self.Spatula.get_people("one, two, three")
+        self.assertEqual(people, ['one', 'two', 'three'])
+
     def test_get_pair_extracts_pair_from_space_separated_string(self):
         pair = self.Spatula.get_pair("[one, two]")
         self.assertEqual(pair, ['one', 'two'])
