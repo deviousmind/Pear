@@ -10,23 +10,27 @@ class PearFilling():
         number_people = len(available_people)
         if number_people <= 1:
             return available_people
+        pairs = self.generate_compatible_pairs(available_people, cannot_pairs)
+        return pairs
 
-        max_pairs = number_people // 2
-        people = list(available_people)
+    def generate_compatible_pairs(self, available_people, cannot_pairs):
         paired = False
+        number_people = len(available_people)
+        max_pairs = number_people // 2
         max_combinations = self.calculate_combinations(number_people)
         pairs_tried = 0
         pairs = []
         while not paired and pairs_tried < max_combinations:
+            people = list(available_people)
             pairs = self.grow_pairs(people, max_pairs)
             paired = self.ripen_pairs(pairs, cannot_pairs)
             if not paired:
                 pairs_tried += 1
-                people = available_people
 
         return pairs
 
-    def ripen_pairs(self, pairs, cannot_pairs):
+    @staticmethod
+    def ripen_pairs(pairs, cannot_pairs):
         if len(cannot_pairs) < 1:
             return True
 
