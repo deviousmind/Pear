@@ -4,6 +4,7 @@ from Filling.pear_filling import PearFilling
 from Crust import pie
 from FirstAid.not_a_pair_error import NotAPairError
 
+
 if __name__ == "__main__":
     slicer = Slicer()
     pear = PearFilling(slicer)
@@ -15,7 +16,8 @@ if __name__ == "__main__":
     print('')
 
     invalid_input = True
-    skip_text = 'You can always leave this blank if you don\'t mind\nthe possibility of having the same people pair again.'
+    skip_text = 'You can always leave this blank if you don\'t mind\n' \
+                'the possibility of having the same people pair again.'
     cannot_pair = []
     print('I can try my best to avoid having the same people pair again.')
     print(skip_text)
@@ -31,18 +33,14 @@ if __name__ == "__main__":
 
         print('')
 
-    pairs = pear.create_pairs(available_people, cannot_pair)
+    while True:
+        pairs = pear.create_pairs(available_people, cannot_pair)
+        print('How about this?')
+        pie.display_pairs(pairs)
+        print('Or should I try again? (y/n)')
+        response = input('')
 
-    print('How about this?')
-
-    for index in range(len(pairs)):
-        pair = pairs[index]
-        person_one = pair[0]
-        if len(pair) > 1:
-            person_two = pair[1]
-            print(person_one + ' and ' + person_two)
-        else:
-            print(person_one + ' alone')
-        print('')
+        if response.lower() != 'y':
+            break
 
     pie.put_a_fork_in_it()
