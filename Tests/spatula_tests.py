@@ -1,5 +1,6 @@
 import unittest
 from Cutlery.spatula import Spatula
+from FirstAid.not_a_pair_error import NotAPairError
 
 
 class SpatulaTests(unittest.TestCase):
@@ -37,6 +38,9 @@ class SpatulaTests(unittest.TestCase):
     def test_get_pairs_composes_any_separated_pair_list(self):
         pairs = self.Spatula.get_pairs("[one two], [three four] [five six]&[seven, eight]")
         self.assertEqual(pairs, [['one', 'two'], ['three', 'four'], ['five', 'six'], ['seven', 'eight']])
+
+    def test_get_pairs_throws_error_if_no_brackets_found(self):
+        self.assertRaises(NotAPairError, self.Spatula.get_pairs, "me you")
 
 if __name__ == '__main__':
     unittest.main()

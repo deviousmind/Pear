@@ -1,0 +1,2 @@
+class NotAPairError(Exception):
+    pass
