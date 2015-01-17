@@ -10,6 +10,7 @@ class PearFilling():
         number_people = len(available_people)
         if number_people <= 1:
             return available_people
+
         max_pairs = number_people // 2
         people = list(available_people)
         paired = False
@@ -18,15 +19,23 @@ class PearFilling():
         pairs = []
         while not paired and pairs_tried < max_combinations:
             pairs = self.grow_pairs(people, max_pairs)
-            paired = True
-            for pair in cannot_pairs:
-                reverse_pair = [pair[1], pair[0]]
-                if pair in pairs or reverse_pair in pairs:
-                    paired = False
-                    people = available_people
-                    pairs_tried += 1
+            paired = self.ripen_pairs(pairs, cannot_pairs)
+            if not paired:
+                pairs_tried += 1
+                people = available_people
 
         return pairs
+
+    def ripen_pairs(self, pairs, cannot_pairs):
+        if len(cannot_pairs) < 1:
+            return True
+
+        for pair in cannot_pairs:
+            reverse_pair = [pair[1], pair[0]]
+            if pair in pairs or reverse_pair in pairs:
+                return False
+
+        return True
 
     def grow_pairs(self, people, max_pairs):
         pairs = []
@@ -43,10 +52,10 @@ class PearFilling():
         self.eliminate_pair(people, pair)
         pairs.append(pair)
 
-    def create_pair(self, available_people):
-        number_people = len(available_people) - 1
+    def create_pair(self, people):
+        number_people = len(people) - 1
         pair_indexes = self.slicer.slice(number_people)
-        pair = self.pick(available_people, pair_indexes)
+        pair = self.pick(people, pair_indexes)
         return pair
 
     @staticmethod

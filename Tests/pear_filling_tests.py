@@ -3,6 +3,7 @@ from Filling.pear_filling import PearFilling
 from Cutlery.slicer import Slicer
 from unittest.mock import Mock
 
+
 class PearFillingTests(unittest.TestCase):
 
     def setUp(self):
@@ -59,8 +60,21 @@ class PearFillingTests(unittest.TestCase):
         pairs = self.Pear.create_pairs([], [])
         self.assertEqual(pairs, [])
 
+    def test_ripen_pairs_returns_true_if_pair_not_in_cannot_pairs(self):
+        ripe = self.Pear.ripen_pairs(['one', 'two'], ['three', 'four'])
+        self.assertTrue(ripe)
 
+    def test_ripen_pairs_returns_false_if_pair_in_cannot_pairs(self):
+        ripe = self.Pear.ripen_pairs(['one', 'two'], ['one', 'two'])
+        self.assertFalse(ripe)
 
+    def test_ripen_pairs_returns_false_if_reverse_pair_in_cannot_pairs(self):
+        ripe = self.Pear.ripen_pairs(['two', 'one'], ['one', 'two'])
+        self.assertFalse(ripe)
+
+    def test_ripen_pairs_returns_true_if_cannot_pairs_empty(self):
+        ripe = self.Pear.ripen_pairs(['one', 'two'], [])
+        self.assertTrue(ripe)
 
 if __name__ == "__main__":
     unittest.main()
