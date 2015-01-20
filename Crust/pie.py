@@ -10,7 +10,6 @@ def display_pairs(pairs):
             print(person_one + ' and ' + person_two)
         else:
             print(person_one + ' alone')
-        print('')
 
 
 def put_a_fork_in_it():
@@ -18,6 +17,6 @@ def put_a_fork_in_it():
     time.sleep(1)
     print('import Skynet')
     print('Attempting to terminate Sarah Conner...')
-    time.sleep(2)
+    time.sleep(1)
     print('I\'ll be back.')
     time.sleep(1)

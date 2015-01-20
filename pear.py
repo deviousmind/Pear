@@ -13,7 +13,7 @@ if __name__ == "__main__":
     available_people_input = input('Who is available to pair today?\n')
     available_people = spatula.get_people(available_people_input)
 
-    print('')
+    print()
 
     invalid_input = True
     skip_text = 'You can always leave this blank if you don\'t mind\n' \
@@ -31,16 +31,16 @@ if __name__ == "__main__":
             print('Sorry, but if you don\'t specify who the pairs are, I can\'t exclude them from pairing again.')
             print(skip_text)
 
-        print('')
 
     while True:
         pairs = pear.create_pairs(available_people, cannot_pair)
-        print('How about this?')
+        print('\nHow about this?\n')
         pie.display_pairs(pairs)
-        print('Or should I try again? (y/n)')
+        print('\nOr should I try again? (y/n)')
         response = input('')
 
         if response.lower() != 'y':
             break
 
+    print()
     pie.put_a_fork_in_it()
