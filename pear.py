@@ -21,7 +21,8 @@ if __name__ == "__main__":
     available_people = []
     try:
         with open(full_path) as settings:
-            available_people = settings.readline()
+            saved_people = settings.readline()
+            available_people = spatula.get_people(saved_people)
             settings.close()
     except IOError:
         available_people = pie.get_available_people(spatula, full_path)
@@ -29,6 +30,14 @@ if __name__ == "__main__":
     if len(available_people) == 0:
         print('I\'m sorry, but I seem to have forgotten you.')
         available_people = pie.get_available_people(spatula, full_path)
+    else:
+        print('Welcome back!')
+        print('I remember your names.')
+        print('Is there anyone missing?')
+        missing_people_input = input('')
+        missing_people = spatula.get_people(missing_people_input)
+        available_people = [p for p in available_people if p not in missing_people]
+        print(available_people)
 
     print()
 
