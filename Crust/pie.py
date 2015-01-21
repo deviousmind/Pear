@@ -1,6 +1,17 @@
 import time
 
 
+class Colors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 def get_available_people(spatula, filepath):
     available_people = []
     valid_people = False
@@ -17,12 +28,39 @@ def get_available_people(spatula, filepath):
     print('\nWould you like me to remember these people? (y/n)')
     remember = input()
     if remember.lower() == 'y':
-        with open(filepath, 'w') as settings:
-            for person in available_people:
-                settings.write(person + ' ')
-            settings.close()
+        save_names(filepath, available_people)
 
     return available_people
+
+
+def save_names(filepath, people):
+    with open(filepath, 'w') as settings:
+        for person in people:
+            settings.write(person + ' ')
+        settings.close()
+
+
+def cool_whip(spatula, filepath, people):
+    incorrect = True
+    while incorrect:
+        print('\nCool! These are the people I know right now:')
+        print(people)
+        y_or_n = False
+        while not y_or_n:
+            print('Is that correct? (y/n)')
+            response = input()
+            if response.lower() == 'y':
+                y_or_n = True
+                incorrect = False
+            elif response.lower() == 'n':
+                y_or_n = True
+                print('\nOh? Well let\'s try again, shall we?')
+                people = get_available_people(spatula, filepath)
+            else:
+                print('Sorry, but this is the one time I actually require \'y\' or \'n\'')
+
+    return people
+
 
 def display_pairs(pairs):
     for index in range(len(pairs)):

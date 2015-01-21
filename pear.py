@@ -10,6 +10,7 @@ if __name__ == "__main__":
     slicer = Slicer()
     pear = PearFilling(slicer)
     spatula = Spatula()
+    colors = pie.Colors()
 
     filepath = os.getenv('APPDATA') + '\\Pear'
     filename = 'pear.txt'
@@ -26,18 +27,30 @@ if __name__ == "__main__":
             settings.close()
     except IOError:
         available_people = pie.get_available_people(spatula, full_path)
+        available_people = pie.cool_whip(spatula, full_path, available_people)
 
     if len(available_people) == 0:
-        print('I\'m sorry, but I seem to have forgotten you.')
+        print(colors.FAIL + 'I\'m sorry, but I seem to have forgotten you.' + colors.ENDC)
         available_people = pie.get_available_people(spatula, full_path)
+        available_people = pie.cool_whip(spatula, full_path, available_people)
+
     else:
-        print('Welcome back!')
-        print('I remember your names.')
-        print('Is there anyone missing?')
-        missing_people_input = input('')
-        missing_people = spatula.get_people(missing_people_input)
-        available_people = [p for p in available_people if p not in missing_people]
+        print('Welcome back! I remember your names.')
+        print('Is this still your group of people? (y/n)')
         print(available_people)
+        keep_people = input()
+        if keep_people.lower() == 'n':
+            print('\nOh? Well let me ask again.')
+            available_people = pie.get_available_people(spatula, full_path)
+            available_people = pie.cool_whip(spatula, full_path, available_people)
+
+    print('\nIs anyone not here today?')
+    missing_people_input = input('')
+    missing_people = spatula.get_people(missing_people_input)
+    available_people = [p for p in available_people if p not in missing_people]
+    print('\nAlright. I\'ll try to make pairs out of these people:')
+
+    print(colors.OKBLUE + available_people.__str__() + colors.ENDC)
 
     print()
 
