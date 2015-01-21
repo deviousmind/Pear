@@ -21,9 +21,9 @@ def get_available_people(spatula, filepath):
         if len(available_people) > 0:
             valid_people = True
         else:
-            print(Colors.WARNING + 'No one?')
-            print('Certainly you made a mistake...' + Colors.ENDC)
-            print(Colors.FAIL + 'Yes. You made a mistake. Let me ask you again.' + Colors.ENDC)
+            print('No one?')
+            print('Certainly you made a mistake...')
+            print('Yes. You made a mistake. Let me ask you again.')
 
     print('\nWould you like me to remember these people? (y/n)')
     remember = input()
@@ -43,8 +43,8 @@ def save_names(filepath, people):
 def cool_whip(spatula, filepath, people):
     incorrect = True
     while incorrect:
-        print(Colors.OKGREEN + '\nCool! These are the people I know right now:' + Colors.ENDC)
-        print(Colors.OKBLUE + people.__str__() + Colors.ENDC)
+        print('\nCool! These are the people I know right now:')
+        print(people.__str__())
         y_or_n = False
         while not y_or_n:
             print('Is that correct? (y/n)')
@@ -57,7 +57,7 @@ def cool_whip(spatula, filepath, people):
                 print('\nOh? Well let\'s try again, shall we?')
                 people = get_available_people(spatula, filepath)
             else:
-                print(Colors.FAIL + 'Sorry, but this is the one time I actually require \'y\' or \'n\'' + Colors.ENDC)
+                print('Sorry, but this is the one time I actually require \'y\' or \'n\'')
 
     return people
 
@@ -68,9 +68,9 @@ def display_pairs(pairs):
         person_one = pair[0]
         if len(pair) > 1:
             person_two = pair[1]
-            print(Colors.OKBLUE + person_one + ' and ' + person_two + Colors.ENDC)
+            print(person_one + ' and ' + person_two)
         else:
-            print(Colors.OKBLUE + person_one + ' alone' + Colors.ENDC)
+            print(person_one + ' alone')
 
 
 def put_a_fork_in_it():

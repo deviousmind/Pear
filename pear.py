@@ -10,7 +10,6 @@ if __name__ == "__main__":
     slicer = Slicer()
     pear = PearFilling(slicer)
     spatula = Spatula()
-    colors = pie.Colors
 
     filepath = os.getenv('APPDATA') + '\\Pear'
     filename = 'pear.txt'
@@ -30,14 +29,14 @@ if __name__ == "__main__":
         available_people = pie.cool_whip(spatula, full_path, available_people)
 
     if len(available_people) == 0:
-        print(colors.FAIL + 'I\'m sorry, but I seem to have forgotten you.' + colors.ENDC)
+        print('I\'m sorry, but I seem to have forgotten you.')
         available_people = pie.get_available_people(spatula, full_path)
         available_people = pie.cool_whip(spatula, full_path, available_people)
 
     else:
         print('Welcome back! I remember your names.')
         print('Is this still your group of people? (y/n)')
-        print(colors.OKBLUE + available_people.__str__() + colors.ENDC)
+        print(available_people.__str__())
         keep_people = input()
         if keep_people.lower() == 'n':
             print('\nOh? Well let me ask again.')
@@ -50,29 +49,28 @@ if __name__ == "__main__":
     available_people = [p for p in available_people if p not in missing_people]
     print('\nAlright. I\'ll try to make pairs out of these people:')
 
-    print(colors.OKBLUE + available_people.__str__() + colors.ENDC)
+    print(available_people.__str__())
 
     print()
 
     invalid_input = True
-    skip_text = colors.WARNING + 'You can always leave this blank if you don\'t mind\n' \
-        'the possibility of having the same people pair again.' + colors.ENDC
+    skip_text = 'You can always leave this blank if you don\'t mind\n' \
+        'the possibility of having the same people pair again.'
     cannot_pair = []
     print('I can try my best to avoid having the same people pair again.')
     print(skip_text)
 
     while invalid_input:
-        cannot_pair_input = input('Who cannot pair today? ' + colors.WARNING
-                                  + '(surround incompatible pairs with [])\n' + colors.ENDC)
+        cannot_pair_input = input('Who cannot pair today? (surround incompatible pairs with [])\n')
         try:
             cannot_pair = spatula.get_pairs(cannot_pair_input)
             if len(cannot_pair) == 1:
-                print(colors.FAIL + 'One person does not make a pair. Try again.' + colors.ENDC)
+                print('One person does not make a pair. Try again.')
             else:
                 invalid_input = False
         except NotAPairError:
-            print(colors.FAIL + 'Sorry, but if you don\'t specify who the pairs are,\n'
-                                'I can\'t exclude them from pairing again.' + colors.ENDC)
+            print('Sorry, but if you don\'t specify who the pairs are,\n'
+                                'I can\'t exclude them from pairing again.')
             print(skip_text)
 
     while True:
