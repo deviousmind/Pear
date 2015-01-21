@@ -55,19 +55,19 @@ if __name__ == "__main__":
     print()
 
     invalid_input = True
-    skip_text = 'You can always leave this blank if you don\'t mind\n' \
-                'the possibility of having the same people pair again.'
+    skip_text = colors.WARNING + 'You can always leave this blank if you don\'t mind\n' \
+                'the possibility of having the same people pair again.' + colors.ENDC
     cannot_pair = []
     print('I can try my best to avoid having the same people pair again.')
     print(skip_text)
 
     while invalid_input:
-        cannot_pair_input = input('Who cannot pair today? (surround incompatible pairs with [])\n')
+        cannot_pair_input = input('Who cannot pair today? '+ colors.WARNING + '(surround incompatible pairs with [])\n' + colors.ENDC)
         try:
             cannot_pair = spatula.get_pairs(cannot_pair_input)
             invalid_input = False
         except NotAPairError:
-            print('Sorry, but if you don\'t specify who the pairs are, I can\'t exclude them from pairing again.')
+            print(colors.FAIL + 'Sorry, but if you don\'t specify who the pairs are, I can\'t exclude them from pairing again.' + colors.ENDC)
             print(skip_text)
 
     while True:
