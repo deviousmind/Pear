@@ -65,7 +65,7 @@ if __name__ == "__main__":
         try:
             cannot_pair = spatula.get_pairs(cannot_pair_input)
             if len(cannot_pair) == 1:
-                print('One person does not make a pair. Try again.')
+                print('\nOne person does not make a pair. Try again.')
             else:
                 invalid_input = False
         except NotAPairError:
