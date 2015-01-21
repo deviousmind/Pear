@@ -66,7 +66,10 @@ if __name__ == "__main__":
                                   + '(surround incompatible pairs with [])\n' + colors.ENDC)
         try:
             cannot_pair = spatula.get_pairs(cannot_pair_input)
-            invalid_input = False
+            if len(cannot_pair) == 1:
+                print(colors.FAIL + 'One person does not make a pair. Try again.' + colors.ENDC)
+            else:
+                invalid_input = False
         except NotAPairError:
             print(colors.FAIL + 'Sorry, but if you don\'t specify who the pairs are,\n'
                                 'I can\'t exclude them from pairing again.' + colors.ENDC)
