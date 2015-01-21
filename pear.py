@@ -3,6 +3,7 @@ from Cutlery.spatula import Spatula
 from Filling.pear_filling import PearFilling
 from Crust import pie
 from FirstAid.not_a_pair_error import NotAPairError
+import os
 
 
 if __name__ == "__main__":
@@ -10,8 +11,24 @@ if __name__ == "__main__":
     pear = PearFilling(slicer)
     spatula = Spatula()
 
-    available_people_input = input('Who is available to pair today?\n')
-    available_people = spatula.get_people(available_people_input)
+    filepath = os.getenv('APPDATA') + '\\Pear'
+    filename = 'pear.txt'
+    full_path = filepath + '\\' + filename
+
+    if not os.path.exists(filepath):
+        os.makedirs(filepath)
+
+    available_people = []
+    try:
+        with open(full_path) as settings:
+            available_people = settings.readline()
+            settings.close()
+    except IOError:
+        available_people = pie.get_available_people(spatula, full_path)
+
+    if len(available_people) == 0:
+        print('I\'m sorry, but I seem to have forgotten you.')
+        available_people = pie.get_available_people(spatula, full_path)
 
     print()
 
@@ -31,13 +48,12 @@ if __name__ == "__main__":
             print('Sorry, but if you don\'t specify who the pairs are, I can\'t exclude them from pairing again.')
             print(skip_text)
 
-
     while True:
         pairs = pear.create_pairs(available_people, cannot_pair)
         print('\nHow about this?\n')
         pie.display_pairs(pairs)
         print('\nOr should I try again? (y/n)')
-        response = input('')
+        response = input()
 
         if response.lower() != 'y':
             break
