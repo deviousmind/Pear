@@ -10,7 +10,7 @@ if __name__ == "__main__":
     slicer = Slicer()
     pear = PearFilling(slicer)
     spatula = Spatula()
-    colors = pie.Colors()
+    colors = pie.Colors
 
     filepath = os.getenv('APPDATA') + '\\Pear'
     filename = 'pear.txt'
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     else:
         print('Welcome back! I remember your names.')
         print('Is this still your group of people? (y/n)')
-        print(available_people)
+        print(colors.OKBLUE + available_people.__str__() + colors.ENDC)
         keep_people = input()
         if keep_people.lower() == 'n':
             print('\nOh? Well let me ask again.')
@@ -56,18 +56,20 @@ if __name__ == "__main__":
 
     invalid_input = True
     skip_text = colors.WARNING + 'You can always leave this blank if you don\'t mind\n' \
-                'the possibility of having the same people pair again.' + colors.ENDC
+        'the possibility of having the same people pair again.' + colors.ENDC
     cannot_pair = []
     print('I can try my best to avoid having the same people pair again.')
     print(skip_text)
 
     while invalid_input:
-        cannot_pair_input = input('Who cannot pair today? '+ colors.WARNING + '(surround incompatible pairs with [])\n' + colors.ENDC)
+        cannot_pair_input = input('Who cannot pair today? ' + colors.WARNING
+                                  + '(surround incompatible pairs with [])\n' + colors.ENDC)
         try:
             cannot_pair = spatula.get_pairs(cannot_pair_input)
             invalid_input = False
         except NotAPairError:
-            print(colors.FAIL + 'Sorry, but if you don\'t specify who the pairs are, I can\'t exclude them from pairing again.' + colors.ENDC)
+            print(colors.FAIL + 'Sorry, but if you don\'t specify who the pairs are,\n'
+                                'I can\'t exclude them from pairing again.' + colors.ENDC)
             print(skip_text)
 
     while True:
