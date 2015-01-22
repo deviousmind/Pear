@@ -1,4 +1,5 @@
 import time
+import os
 
 
 class Colors:
@@ -10,6 +11,50 @@ class Colors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+
+def prepare():
+    filepath = os.getenv('APPDATA') + '\\Pear'
+    filename = 'pear.txt'
+    full_path = filepath + '\\' + filename
+
+    if not os.path.exists(filepath):
+        os.makedirs(filepath)
+
+    return full_path
+
+
+def bake(spatula, filepath):
+    with open(filepath) as settings:
+        saved_people = settings.readline()
+        available_people = spatula.get_people(saved_people)
+        settings.close()
+
+    if len(available_people) == 0:
+        available_people = remake(spatula, filepath)
+
+    else:
+        taste_test(spatula, filepath, available_people)
+
+    return available_people
+
+
+def remake(spatula, filepath):
+    print('I\'m sorry, but I seem to have forgotten you.')
+    available_people = add_toppings(spatula, filepath)
+    return available_people
+
+
+def taste_test(spatula, filepath, people):
+    print('Welcome back! I remember your names.')
+    print('Is this still your group of people? (y/n)')
+    print(people.__str__())
+    keep_people = input()
+    if keep_people.lower() == 'n':
+        print('\nOh? Well let me ask again.')
+        people = add_toppings(spatula, filepath)
+
+    return people
 
 
 def get_available_people(spatula, filepath):
@@ -60,6 +105,12 @@ def cool_whip(spatula, filepath, people):
                 print('Sorry, but this is the one time I actually require \'y\' or \'n\'')
 
     return people
+
+
+def add_toppings(spatula, filepath):
+    available_people = get_available_people(spatula, filepath)
+    available_people = cool_whip(spatula, filepath, available_people)
+    return available_people
 
 
 def display_pairs(pairs):
