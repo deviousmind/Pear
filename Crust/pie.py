@@ -118,8 +118,11 @@ class Pie:
             cannot_pair_input = input('Who cannot pair today? (surround incompatible pairs with [])\n')
             try:
                 cannot_pair = self.spatula.get_pairs(cannot_pair_input)
-                number_pairs = len(cannot_pair)
-                if number_pairs > 0 and len(cannot_pair[0]) == 1:
+                bad_pair_found = False
+                for pair in cannot_pair:
+                    if len(pair) == 1:
+                        bad_pair_found = True
+                if bad_pair_found:
                     print('\nOne person does not make a pair. Try again.')
                 else:
                     invalid_input = False
