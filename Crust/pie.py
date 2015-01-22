@@ -1,3 +1,4 @@
+from FirstAid.not_a_pair_error import NotAPairError
 import time
 import os
 
@@ -13,6 +14,18 @@ class Colors:
     UNDERLINE = '\033[4m'
 
 
+def cut(people, incompatible, pear):
+    while True:
+        pairs = pear.create_pairs(people, incompatible)
+        print('\nHow about this?\n')
+        display_pairs(pairs)
+        print('\nOr should I try again? (y/n)')
+        response = input()
+
+        if response.lower() != 'y':
+            break
+
+
 def prepare():
     filepath = os.getenv('APPDATA') + '\\Pear'
     filename = 'pear.txt'
@@ -24,6 +37,15 @@ def prepare():
     return full_path
 
 
+def present(spatula, filepath):
+    try:
+        available_people = bake(spatula, filepath)
+    except IOError:
+        available_people = add_toppings(spatula, filepath)
+
+    return available_people
+
+
 def bake(spatula, filepath):
     with open(filepath) as settings:
         saved_people = settings.readline()
@@ -32,9 +54,8 @@ def bake(spatula, filepath):
 
     if len(available_people) == 0:
         available_people = remake(spatula, filepath)
-
     else:
-        taste_test(spatula, filepath, available_people)
+        available_people = taste_test(spatula, filepath, available_people)
 
     return available_people
 
@@ -111,6 +132,40 @@ def add_toppings(spatula, filepath):
     available_people = get_available_people(spatula, filepath)
     available_people = cool_whip(spatula, filepath, available_people)
     return available_people
+
+
+def check_appetite(spatula, people):
+    print('\nIs anyone not here today?')
+    missing_people_input = input('')
+    missing_people = spatula.get_people(missing_people_input)
+    people = [p for p in people if p not in missing_people]
+    print('\nAlright. I\'ll try to make pairs out of these people:')
+    print(people.__str__())
+    return people
+
+
+def check_allergies(spatula):
+    invalid_input = True
+    skip_text = 'You can always leave this blank if you don\'t mind\n' \
+                'the possibility of having the same people pair again.'
+    print('I can try my best to avoid having the same people pair again.')
+    print(skip_text)
+
+    cannot_pair = []
+    while invalid_input:
+        cannot_pair_input = input('Who cannot pair today? (surround incompatible pairs with [])\n')
+        try:
+            cannot_pair = spatula.get_pairs(cannot_pair_input)
+            if len(cannot_pair) == 1:
+                print('\nOne person does not make a pair. Try again.')
+            else:
+                invalid_input = False
+        except NotAPairError:
+            print('Sorry, but if you don\'t specify who the pairs are,\n'
+                  'I can\'t exclude them from pairing again.')
+            print(skip_text)
+
+    return cannot_pair
 
 
 def display_pairs(pairs):
