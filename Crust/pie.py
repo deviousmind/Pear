@@ -100,7 +100,8 @@ class Pie:
         print('\nIs anyone not here today?')
         missing_people_input = input('')
         missing_people = self.spatula.get_people(missing_people_input)
-        people = [p for p in people if p not in missing_people]
+        lower_missing = [mp.lower() for mp in missing_people]
+        people = [p for p in people if p.lower() not in lower_missing]
         print('\nAlright. I\'ll try to make pairs out of these people:')
         print(people.__str__())
         print()
