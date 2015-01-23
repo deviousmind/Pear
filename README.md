@@ -18,6 +18,3 @@ What it does not:
 What it may do in the future:
 - Display in colored output
 - Include a UI (most likely another project)
-
-<h4>Getting Started</h4>
-Download and take a bite into <a href=./Pear.exe>Pear</a>
