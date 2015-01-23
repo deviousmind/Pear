@@ -1,5 +1,6 @@
 import time
 import os
+from Crust import decorator
 
 
 def prepare():
@@ -32,16 +33,16 @@ def display_pairs(pairs):
         person_one = pair[0]
         if len(pair) > 1:
             person_two = pair[1]
-            print(person_one + ' and ' + person_two)
+            decorator.ok(person_one + ' and ' + person_two)
         else:
-            print(person_one + ' alone')
+            decorator.ok(person_one + ' alone')
 
 
 def put_a_fork_in_it():
-    print('Terminating, please wait...')
+    decorator.warning('Terminating, please wait...')
     time.sleep(1)
-    print('import Skynet')
-    print('Attempting to terminate Sarah Conner...')
+    decorator.warning('import Skynet')
+    decorator.warning('Attempting to terminate Sarah Conner...')
     time.sleep(1)
-    print('I\'ll be back.')
+    decorator.warning('I\'ll be back.')
     time.sleep(1)

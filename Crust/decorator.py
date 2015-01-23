@@ -1,14 +1,17 @@
+from Crust.colors import Colors
+
+
 def warning(message):
-    pass
+    print(Colors.WARNING + message + Colors.ENDC)
 
 
 def error(message):
-    pass
+    print(Colors.FAIL + message + Colors.ENDC)
 
 
 def success(message):
-    pass
+    print(Colors.OKGREEN + message + Colors.ENDC)
 
 
 def ok(message):
-    pass
+    print(Colors.OKBLUE + message + Colors.ENDC)
