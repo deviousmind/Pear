@@ -21,8 +21,8 @@ class Spatula:
         pairs = []
         for raw_pair in raw_split:
             pair = self.get_pair(raw_pair)
-            pairs.append(pair)
-
+            if(len(pair) > 0):
+                pairs.append(pair)
         return pairs
 
     @staticmethod
