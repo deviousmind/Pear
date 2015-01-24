@@ -2,18 +2,18 @@ class Colors:
 
     ESC = '\033['
     RESET = ESC + '0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+    BOLD = ESC + '1m'
     GREY = ESC + '90m'
     RED = ESC + '91m'
     GREEN = ESC + '92m'
     YELLOW = ESC + '93m'
     BLUE = ESC + '94m'
-    MAGENTA = '\033[95m'
-    CYAN = '\033[96m'
+    MAGENTA = ESC + '95m'
+    CYAN = ESC + '96m'
 
 
 if __name__ == "__main__":
+    print(Colors.BOLD + 'TEST')
     print(Colors.GREY + 'TEST')
     print(Colors.RED + 'TEST')
     print(Colors.GREEN + 'TEST')

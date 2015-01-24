@@ -39,10 +39,10 @@ def display_pairs(pairs):
 
 
 def put_a_fork_in_it():
-    decorator.warning('Terminating, please wait...')
+    decorator.warn('Terminating, please wait...')
     time.sleep(1)
-    decorator.warning('import Skynet')
-    decorator.warning('Attempting to terminate Sarah Conner...')
+    decorator.warn('import Skynet')
+    decorator.warn('Attempting to terminate Sarah Conner...')
     time.sleep(1)
-    decorator.warning('I\'ll be back.')
+    decorator.warn('I\'ll be back.')
     time.sleep(1)

@@ -1,17 +1,37 @@
 from Crust.colors import Colors
 
 
-def warning(message):
-    print(Colors.YELLOW + message + Colors.RESET)
+def warn(message):
+    return Colors.YELLOW + escape(message)
 
 
 def error(message):
-    print(Colors.RED + message + Colors.RESET)
+    return Colors.RED + escape(message)
 
 
 def success(message):
-    print(Colors.GREEN + message + Colors.RESET)
+    return Colors.GREEN + escape(message)
 
 
 def ok(message):
-    print(Colors.BLUE + message + Colors.RESET)
+    return Colors.BLUE + escape(message)
+
+
+def request(message):
+    return Colors.MAGENTA + escape(message)
+
+
+def hint(message):
+    return Colors.GREY + escape(message)
+
+
+def emphasis(message):
+    return Colors.BOLD + escape(message)
+
+
+def attention(message):
+    return Colors.CYAN + escape(message)
+
+
+def escape(message):
+    return message + Colors.RESET

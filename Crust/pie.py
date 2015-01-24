@@ -32,7 +32,7 @@ class Pie:
         return available_people
 
     def remake(self):
-        decorator.warning('I\'m sorry, but I seem to have forgotten you.')
+        decorator.warn('I\'m sorry, but I seem to have forgotten you.')
         available_people = self.add_toppings()
         return available_people
 
@@ -42,7 +42,7 @@ class Pie:
         decorator.ok(people.__str__())
         keep_people = input()
         if keep_people.lower() == 'n':
-            decorator.warning('\nOh? Well let me ask again.')
+            decorator.warn('\nOh? Well let me ask again.')
             people = self.add_toppings()
 
         return people
@@ -61,8 +61,8 @@ class Pie:
             if len(available_people) > 0:
                 valid_people = True
             else:
-                decorator.warning('No one?')
-                decorator.warning('Certainly you made a mistake...')
+                decorator.warn('No one?')
+                decorator.warn('Certainly you made a mistake...')
                 decorator.error('Yes. You made a mistake. Let me ask you again.')
 
         print('\nWould you like me to remember these people? (y/n)')
@@ -92,7 +92,7 @@ class Pie:
                     incorrect = False
                 elif response.lower() == 'n':
                     y_or_n = True
-                    decorator.warning('\nOh? Well let\'s try again, shall we?')
+                    decorator.warn('\nOh? Well let\'s try again, shall we?')
                     people = self.get_available_people()
                 else:
                     decorator.error('Sorry, but this is the one time I actually require \'y\' or \'n\'')
@@ -114,8 +114,8 @@ class Pie:
         invalid_input = True
         skip_text = 'If you don\'t mind the possibility of the same people pairing again,\n' \
                     'you can leave this blank.'
-        decorator.warning('I can try my best to avoid having the same people pair again.')
-        decorator.warning(skip_text)
+        decorator.warn('I can try my best to avoid having the same people pair again.')
+        decorator.warn(skip_text)
 
         cannot_pair = []
         while invalid_input:
@@ -128,12 +128,12 @@ class Pie:
                         bad_pair_found = True
                 if bad_pair_found:
                     decorator.error('\nOne person does not make a pair. Try again.')
-                    decorator.warning(skip_text)
+                    decorator.warn(skip_text)
                 else:
                     invalid_input = False
             except NotAPairError:
                 decorator.error('\nSorry, but if you don\'t specify who the pairs are,\n'
                                 'I can\'t exclude them from pairing again.')
-                decorator.warning(skip_text)
+                decorator.warn(skip_text)
 
         return cannot_pair
