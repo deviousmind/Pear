@@ -1,5 +1,6 @@
 from FirstAid.not_a_pair_error import NotAPairError
 from Crust import decorator
+from colorama import init
 
 
 class Pie:
@@ -7,6 +8,7 @@ class Pie:
     def __init__(self, spatula, filepath):
         self.filepath = filepath
         self.spatula = spatula
+        init()
 
     def present(self):
         try:
