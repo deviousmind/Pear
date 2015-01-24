@@ -16,5 +16,5 @@ What it does not:
 - Provide any nutritional value
 
 What it may do in the future:
-- Display in colored output
+- Allow for easier pool managment (add/remove people from your pool without having to recreate it)
 - Include a UI (most likely another project)
