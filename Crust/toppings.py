@@ -19,7 +19,7 @@ def cut(people, incompatible, pear):
         pairs = pear.create_pairs(people, incompatible)
         print('\nHow about this?\n')
         display_pairs(pairs)
-        print('\nOr should I try again? (y/n)')
+        print(decorator.request('\nOr should I try again? (y/n)'))
         response = input()
 
         if response.lower() != 'y':
@@ -33,16 +33,16 @@ def display_pairs(pairs):
         person_one = pair[0]
         if len(pair) > 1:
             person_two = pair[1]
-            decorator.ok(person_one + ' and ' + person_two)
+            print(decorator.result(person_one + ' and ' + person_two))
         else:
-            decorator.ok(person_one + ' alone')
+            print(decorator.result(person_one + ' alone'))
 
 
 def put_a_fork_in_it():
-    decorator.warn('Terminating, please wait...')
+    print(decorator.warn('Terminating, please wait...'))
     time.sleep(1)
-    decorator.warn('import Skynet')
-    decorator.warn('Attempting to terminate Sarah Conner...')
+    print(decorator.warn('import Skynet'))
+    print(decorator.warn('Attempting to terminate Sarah Conner...'))
     time.sleep(1)
-    decorator.warn('I\'ll be back.')
+    print(decorator.warn('I\'ll be back.'))
     time.sleep(1)

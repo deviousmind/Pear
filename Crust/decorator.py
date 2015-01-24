@@ -13,7 +13,7 @@ def success(message):
     return Colors.GREEN + escape(message)
 
 
-def ok(message):
+def result(message):
     return Colors.BLUE + escape(message)
 
 

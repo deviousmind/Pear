@@ -3,8 +3,11 @@ from Cutlery.spatula import Spatula
 from Filling.pear_filling import PearFilling
 from Crust.pie import Pie
 from Crust import toppings
+from colorama import init
+
 
 if __name__ == "__main__":
+    init()
     slicer = Slicer()
     pear = PearFilling(slicer)
     spatula = Spatula()
