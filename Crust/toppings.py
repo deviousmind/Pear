@@ -33,9 +33,9 @@ def display_pairs(pairs):
         person_one = pair[0]
         if len(pair) > 1:
             person_two = pair[1]
-            print(decorator.result(person_one + ' and ' + person_two))
+            print(decorator.attention(person_one + ' and ' + person_two))
         else:
-            print(decorator.result(person_one + ' alone'))
+            print(decorator.attention(person_one + ' alone'))
 
 
 def put_a_fork_in_it():

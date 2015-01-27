@@ -36,7 +36,7 @@ class Pie:
 
     def taste_test(self, people):
         print(decorator.emphasis('Welcome back!') + decorator.success(' I remember your names.'))
-        print(decorator.request('Is this still your group of people? (y/n)'))
+        print('Is this still your group of people? (y/n)')
         print(decorator.attention(people.__str__()))
         keep_people = input()
         if keep_people.lower() == 'n':
@@ -83,7 +83,7 @@ class Pie:
             y_or_n = False
             while not y_or_n:
                 print(decorator.attention(people.__str__()))
-                print(decorator.request('Is that correct? (y/n)'))
+                print('Is that correct? (y/n)')
                 response = input()
                 if response.lower() == 'y':
                     y_or_n = True
