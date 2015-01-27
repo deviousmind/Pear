@@ -12,7 +12,7 @@ if __name__ == "__main__":
     if sys.platform == 'Windows':
         init()
 
-    if len(sys.argv) == 2:
+    if len(sys.argv) > 1:
         Colors.colorify()
         
     slicer = Slicer()
