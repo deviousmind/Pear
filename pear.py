@@ -4,10 +4,17 @@ from Filling.pear_filling import PearFilling
 from Crust.pie import Pie
 from Crust import toppings
 from colorama import init
+from Crust.colors import Colors
+import sys
 
 
 if __name__ == "__main__":
-    init()
+    if sys.platform == 'Windows':
+        init()
+
+    if len(sys.argv) == 2:
+        Colors.colorify()
+        
     slicer = Slicer()
     pear = PearFilling(slicer)
     spatula = Spatula()
