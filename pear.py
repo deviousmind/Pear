@@ -9,7 +9,7 @@ import sys
 
 
 if __name__ == "__main__":
-    if sys.platform == 'Windows':
+    if 'win' in sys.platform.lower():
         init()
 
     if len(sys.argv) > 1:
