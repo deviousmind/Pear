@@ -1,4 +1,6 @@
 from FirstAid.not_a_pair_error import NotAPairError
+from Appliances.oven import Oven
+from Appliances.refrigerator import Refrigerator
 from Crust import decorator
 
 
@@ -17,10 +19,8 @@ class Pie:
         return available_people
 
     def bake(self):
-        with open(self.filepath) as settings:
-            saved_people = settings.readline()
-            available_people = self.spatula.get_people(saved_people)
-            settings.close()
+        saved_people = Oven.bake(self.filepath)
+        available_people = self.spatula.get_people(saved_people)
 
         if len(available_people) == 0:
             available_people = self.remake()
@@ -66,15 +66,9 @@ class Pie:
         print(decorator.request('\nWould you like me to remember these people? (y/n)'))
         remember = input()
         if remember.lower() == 'y':
-            self.save_names(available_people)
+            Refrigerator.save_names(self.filepath, available_people)
 
         return available_people
-
-    def save_names(self, people):
-        with open(self.filepath, 'w') as settings:
-            for person in people:
-                settings.write(person + ' ')
-            settings.close()
 
     def cool_whip(self, people):
         incorrect = True
