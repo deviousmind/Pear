@@ -21,7 +21,7 @@ class Spatula:
         pairs = []
         for raw_pair in raw_split:
             pair = self.get_pair(raw_pair)
-            if(len(pair) > 0):
+            if len(pair) > 0:
                 pairs.append(pair)
         return pairs
 
@@ -29,3 +29,9 @@ class Spatula:
     def get_pair(raw_pair):
         split_names = re.findall(r"[\w']+", raw_pair)
         return split_names
+
+    def remove_people(self, people, raw_text):
+        missing_people = self.get_people(raw_text)
+        lower_missing = [mp.lower() for mp in missing_people]
+        remaining = [p for p in people if p.lower() not in lower_missing]
+        return remaining

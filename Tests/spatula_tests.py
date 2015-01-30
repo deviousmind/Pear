@@ -1,6 +1,7 @@
 import unittest
 from Cutlery.spatula import Spatula
 from FirstAid.not_a_pair_error import NotAPairError
+from unittest.mock import Mock
 
 
 class SpatulaTests(unittest.TestCase):
@@ -49,6 +50,27 @@ class SpatulaTests(unittest.TestCase):
 
     def test_get_pairs_throws_error_if_no_brackets_found(self):
         self.assertRaises(NotAPairError, self.Spatula.get_pairs, "me you")
+
+    def test_remove_people_gets_people_from_raw_text(self):
+        self.Spatula.get_people = Mock(return_value=[])
+        expected = "one two"
+        self.Spatula.remove_people([], expected)
+
+        self.Spatula.get_people.assert_called_with(expected)
+
+    def test_remove_people_removes_people_from_list(self):
+        missing_people = ["me", "myself"]
+        self.Spatula.get_people = Mock(return_value=missing_people)
+        result = self.Spatula.remove_people(["me", "myself", "i"], "me myself")
+
+        self.assertEqual(result, ["i"])
+
+    def test_remove_people_removes_people_ignoring_case(self):
+        missing_people = ["mE", "mYseLf"]
+        self.Spatula.get_people = Mock(return_value=missing_people)
+        result = self.Spatula.remove_people(["me", "myself", "i"], "mE mYseLf")
+
+        self.assertEqual(result, ["i"])
 
 if __name__ == '__main__':
     unittest.main()

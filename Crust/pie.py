@@ -95,9 +95,7 @@ class Pie:
     def check_appetite(self, people):
         print('\nIs anyone not here today?')
         missing_people_input = input('')
-        missing_people = self.spatula.get_people(missing_people_input)
-        lower_missing = [mp.lower() for mp in missing_people]
-        people = [p for p in people if p.lower() not in lower_missing]
+        people = self.spatula.remove_people(people, missing_people_input)
         print(decorator.success('\nAlright. I\'ll try to make pairs out of these people:'))
         print(decorator.attention(people.__str__() + '\n'))
         return people
