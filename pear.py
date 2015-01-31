@@ -5,6 +5,7 @@ from Filling.pear_filling import PearFilling
 from Crust.crust import Crust
 from Crust import toppings
 from KitchenStaff.chef import Chef
+from KitchenStaff import waitress
 from colorama import init
 from Crust.colors import Colors
 import sys
@@ -20,7 +21,7 @@ if __name__ == "__main__":
     slicer = Slicer()
     pear = PearFilling(slicer)
     spatula = Spatula()
-    filepath = toppings.prepare()
+    filepath = waitress.serve()
     crust = Crust(spatula, filepath)
     chef = Chef(crust)
 
