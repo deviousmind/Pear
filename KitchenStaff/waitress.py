@@ -27,11 +27,33 @@ class Waitress:
         print(decorator.attention(people.__str__() + '\n'))
         return people
 
+    def special_order(self):
+        valid_input = False
+        must_pairs = []
+        while not valid_input:
+            print('Does anyone want to stick together?' + decorator.hint('(surround pairs with [])'))
+            must_pair_input = input()
+            try:
+                must_pairs = self.spatula.get_pairs(must_pair_input)
+                bad_pair_found = False
+                for pair in must_pairs:
+                    if len(pair) == 1:
+                        bad_pair_found = True
+                if bad_pair_found:
+                    print(decorator.error('\nOne person does not make a pair. Try again.'))
+                else:
+                    valid_input = True
+            except NotAPairError:
+                print(decorator.error('\nSorry, but if you don\'t specify who the pairs are,\n'
+                                      'I can\'t have them pair again.'))
+
+        return must_pairs
+
     def check_allergies(self):
         invalid_input = True
         skip_text = 'If you don\'t mind the possibility of the same people pairing again,\n' \
                     'you can leave this blank.'
-        print('I can try my best to avoid having the same people pair again.')
+        print('\nI can try my best to avoid having the same people pair again.')
         print(decorator.hint(skip_text))
 
         cannot_pair = []

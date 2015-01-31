@@ -1,7 +1,7 @@
 from Crust import decorator
 
 
-def cut(people, incompatible, filling):
+def cut(people, incompatible, forced, filling):
     while True:
         pairs = filling.create_pairs(people, incompatible)
         print('\nHow about this?\n')

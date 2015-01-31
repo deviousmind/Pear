@@ -6,7 +6,7 @@ class PearFilling():
     def __init__(self, slicer):
         self.slicer = slicer
 
-    def create_pairs(self, available_people, cannot_pairs):
+    def create_pairs(self, available_people, cannot_pairs = list):
         number_people = len(available_people)
         if number_people <= 1:
             return [available_people]

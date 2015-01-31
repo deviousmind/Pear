@@ -1,12 +1,12 @@
 class Chef:
 
-    def __init__(self, crust):
-        self.crust = crust
+    def __init__(self, pie):
+        self.pie = pie
 
     def bake_pie(self):
         try:
-            available_people = self.crust.add_toppings()
+            available_people = self.pie.add_toppings()
         except IOError:
-            available_people = self.crust.create()
+            available_people = self.pie.create()
 
         return available_people

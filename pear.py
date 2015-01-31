@@ -28,6 +28,8 @@ if __name__ == "__main__":
 
     available_people = chef.bake_pie()
     available_people = waitress.check_appetite(available_people)
+    must_pair = waitress.special_order()
+    print(must_pair)
     cannot_pair = waitress.check_allergies()
-    knife.cut(available_people, cannot_pair, filling)
+    knife.cut(available_people, cannot_pair, must_pair, filling)
     toppings.put_a_fork_in_it()
