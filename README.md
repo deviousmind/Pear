@@ -9,6 +9,7 @@ What it does:
 - Prevents the same people from being paired together again if requested
 - Remembers your pool of people, and allows it to be changed, if requested
 - Excludes missing people from your pool without needing to alter your saved people
+- Allows pairs to be specified
 
 What it does not:
 - Match people based on strengths/weaknesses
