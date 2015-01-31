@@ -1,9 +1,9 @@
 from Crust import decorator
 
 
-def cut(people, incompatible, pear):
+def cut(people, incompatible, filling):
     while True:
-        pairs = pear.create_pairs(people, incompatible)
+        pairs = filling.create_pairs(people, incompatible)
         print('\nHow about this?\n')
         display_pairs(pairs)
         print(decorator.request('\nOr should I try again? (y/n)'))

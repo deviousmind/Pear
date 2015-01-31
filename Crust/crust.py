@@ -91,32 +91,3 @@ class Crust:
         print(decorator.success('\nAlright. I\'ll try to make pairs out of these people:'))
         print(decorator.attention(people.__str__() + '\n'))
         return people
-
-    def check_allergies(self):
-        invalid_input = True
-        skip_text = 'If you don\'t mind the possibility of the same people pairing again,\n' \
-                    'you can leave this blank.'
-        print('I can try my best to avoid having the same people pair again.')
-        print(decorator.hint(skip_text))
-
-        cannot_pair = []
-        while invalid_input:
-            print('Who cannot pair today? ' + decorator.hint('(surround incompatible pairs with [])'))
-            cannot_pair_input = input()
-            try:
-                cannot_pair = self.spatula.get_pairs(cannot_pair_input)
-                bad_pair_found = False
-                for pair in cannot_pair:
-                    if len(pair) == 1:
-                        bad_pair_found = True
-                if bad_pair_found:
-                    print(decorator.error('\nOne person does not make a pair. Try again.'))
-                    print(decorator.hint(skip_text))
-                else:
-                    invalid_input = False
-            except NotAPairError:
-                print(decorator.error('\nSorry, but if you don\'t specify who the pairs are,\n'
-                                      'I can\'t exclude them from pairing again.'))
-                print(decorator.hint(skip_text))
-
-        return cannot_pair
