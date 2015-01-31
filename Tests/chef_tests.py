@@ -4,7 +4,7 @@ from KitchenStaff.chef import Chef
 
 
 class ChefTests(unittest.TestCase):
-    class FakePie:
+    class FakeCrust:
         def create(self):
             pass
 
@@ -12,16 +12,16 @@ class ChefTests(unittest.TestCase):
             raise IOError
 
     def setUp(self):
-        self.pie = self.FakePie()
-        self.chef = Chef(self.pie)
+        self.crust = self.FakeCrust()
+        self.chef = Chef(self.crust)
 
     def tearDown(self):
         del self.chef
-        del self.pie
+        del self.crust
 
     def test_bake_pie_returns_available_people(self):
         expected = ["me", "myself"]
-        self.pie.add_toppings = Mock(return_value=expected)
+        self.crust.add_toppings = Mock(return_value=expected)
 
         people = self.chef.bake_pie()
 
@@ -29,7 +29,7 @@ class ChefTests(unittest.TestCase):
 
     def test_bake_pie_returns_creates_new_people_if_retrieval_fails(self):
         expected = ["me", "myself"]
-        self.pie.create = Mock(return_value=expected)
+        self.crust.create = Mock(return_value=expected)
 
         people = self.chef.bake_pie()
 
