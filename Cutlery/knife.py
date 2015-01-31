@@ -4,6 +4,8 @@ from Crust import decorator
 def cut(people, incompatible, forced, filling):
     while True:
         pairs = filling.create_pairs(people, incompatible)
+        for pair in forced:
+            pairs.append(pair)
         print('\nHow about this?\n')
         display_pairs(pairs)
         print(decorator.request('\nOr should I try again? (y/n)'))
