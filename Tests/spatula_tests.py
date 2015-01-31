@@ -72,5 +72,21 @@ class SpatulaTests(unittest.TestCase):
 
         self.assertEqual(result, ["i"])
 
+    def test_remove_pairs_removes_people(self):
+        pairs = [['me', 'myself'], ['we', 'us']]
+        people = ['me', 'myself', 'i', 'we', 'us']
+
+        result = self.Spatula.remove_pairs(people, pairs)
+
+        self.assertEqual(result, ['i'])
+
+    def test_remove_pairs_removes_people_ignoring_case(self):
+        pairs = [['me', 'mySelf'], ['wE', 'us']]
+        people = ['me', 'Myself', 'i', 'We', 'us']
+
+        result = self.Spatula.remove_pairs(people, pairs)
+
+        self.assertEqual(result, ['i'])
+
 if __name__ == '__main__':
     unittest.main()

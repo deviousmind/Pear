@@ -35,3 +35,10 @@ class Spatula:
         lower_missing = [mp.lower() for mp in missing_people]
         remaining = [p for p in people if p.lower() not in lower_missing]
         return remaining
+
+    def remove_pairs(self, people, pairs):
+        remaining = [p.lower() for p in people]
+        for pair in pairs:
+            lower_pair = [p.lower() for p in pair]
+            remaining = [p for p in remaining if p not in lower_pair]
+        return remaining
