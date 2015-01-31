@@ -4,21 +4,13 @@ from Appliances.refrigerator import Refrigerator
 from Crust import decorator
 
 
-class Pie:
+class Crust:
 
     def __init__(self, spatula, filepath):
         self.filepath = filepath
         self.spatula = spatula
 
-    def present(self):
-        try:
-            available_people = self.bake()
-        except IOError:
-            available_people = self.add_toppings()
-
-        return available_people
-
-    def bake(self):
+    def add_toppings(self):
         saved_people = Oven.bake(self.filepath)
         available_people = self.spatula.get_people(saved_people)
 
@@ -31,7 +23,7 @@ class Pie:
 
     def remake(self):
         print(decorator.warn('I\'m sorry, but I seem to have forgotten you.'))
-        available_people = self.add_toppings()
+        available_people = self.create()
         return available_people
 
     def taste_test(self, people):
@@ -41,11 +33,11 @@ class Pie:
         keep_people = input()
         if keep_people.lower() == 'n':
             print(decorator.warn('\nOh? Well let me ask again.'))
-            people = self.add_toppings()
+            people = self.create()
 
         return people
 
-    def add_toppings(self):
+    def create(self):
         available_people = self.get_available_people()
         available_people = self.cool_whip(available_people)
         return available_people
