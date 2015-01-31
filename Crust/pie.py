@@ -1,10 +1,9 @@
-from FirstAid.not_a_pair_error import NotAPairError
 from Appliances.oven import Oven
 from Appliances.refrigerator import Refrigerator
 from Crust import decorator
 
 
-class Crust:
+class Pie:
 
     def __init__(self, spatula, filepath):
         self.filepath = filepath
@@ -82,12 +81,4 @@ class Crust:
                     print(decorator.error('Sorry, but this is the one time I actually require \'y\' or \'n\''))
                     print('These are the people I know right now:')
 
-        return people
-
-    def check_appetite(self, people):
-        print('\nIs anyone not here today?')
-        missing_people_input = input('')
-        people = self.spatula.remove_people(people, missing_people_input)
-        print(decorator.success('\nAlright. I\'ll try to make pairs out of these people:'))
-        print(decorator.attention(people.__str__() + '\n'))
         return people

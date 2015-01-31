@@ -19,6 +19,14 @@ class Waitress:
 
         return full_path
 
+    def check_appetite(self, people):
+        print('\nIs anyone not here today?')
+        missing_people_input = input('')
+        people = self.spatula.remove_people(people, missing_people_input)
+        print(decorator.success('\nAlright. I\'ll try to make pairs out of these people:'))
+        print(decorator.attention(people.__str__() + '\n'))
+        return people
+
     def check_allergies(self):
         invalid_input = True
         skip_text = 'If you don\'t mind the possibility of the same people pairing again,\n' \

@@ -2,7 +2,7 @@ from Cutlery.slicer import Slicer
 from Cutlery.spatula import Spatula
 from Cutlery import knife
 from Filling.pear_filling import PearFilling
-from Crust.crust import Crust
+from Crust.pie import Pie
 from Crust import toppings
 from KitchenStaff.chef import Chef
 from KitchenStaff.waitress import Waitress
@@ -23,11 +23,11 @@ if __name__ == "__main__":
     spatula = Spatula()
     waitress = Waitress(spatula)
     filepath = waitress.serve()
-    crust = Crust(spatula, filepath)
-    chef = Chef(crust)
+    pie = Pie(spatula, filepath)
+    chef = Chef(pie)
 
     available_people = chef.bake_pie()
-    available_people = crust.check_appetite(available_people)
+    available_people = waitress.check_appetite(available_people)
     cannot_pair = waitress.check_allergies()
     knife.cut(available_people, cannot_pair, filling)
     toppings.put_a_fork_in_it()
