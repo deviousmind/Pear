@@ -1,5 +1,6 @@
 from Cutlery.slicer import Slicer
 from Cutlery.spatula import Spatula
+from Cutlery import knife
 from Filling.pear_filling import PearFilling
 from Crust.crust import Crust
 from Crust import toppings
@@ -26,5 +27,5 @@ if __name__ == "__main__":
     available_people = chef.bake_pie()
     available_people = crust.check_appetite(available_people)
     cannot_pair = crust.check_allergies()
-    toppings.cut(available_people, cannot_pair, pear)
+    knife.cut(available_people, cannot_pair, pear)
     toppings.put_a_fork_in_it()
