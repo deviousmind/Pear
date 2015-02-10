@@ -50,6 +50,7 @@ class PearFillingTests(unittest.TestCase):
         self.Slicer.slice = Mock(side_effect=[[1, 0], [0, 1], [0, 2], [0, 1]])
         pairs = self.Pear.create_pairs(['can', 'not', 'we', 'you'], [['can', 'not']])
         self.assertNotIn(['not', 'can'], pairs)
+        self.assertNotIn(['can', 'not'], pairs)
 
     def test_create_pairs_allows_cannot_pair_to_pair_if_another_pair_is_impossible(self):
         self.Slicer.slice = Mock(side_effect=[[0, 1], [0, 1], [0, 1]])

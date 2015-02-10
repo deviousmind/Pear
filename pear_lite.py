@@ -1,4 +1,6 @@
 import math
+import random
+import re
 
 
 class PearFilling():
@@ -78,10 +80,38 @@ class PearFilling():
     @staticmethod
     def calculate_combinations(total):
         # n! / ( r! (n - r)! )
-        # two people make a pair, so r = 2, n = number in pool
         total_fac = math.factorial(total)
         others_chosen = 2
         pair_fac = math.factorial(others_chosen)
         combo_fac = math.factorial(total - others_chosen)
         combos = total_fac / (pair_fac * combo_fac)
         return combos
+
+
+class Slicer:
+
+    def slice(self, max_val):
+        slice_one = random.randint(0, max_val)
+        slice_two = self.slice_again(slice_one, max_val)
+        return [slice_one, slice_two]
+
+    @staticmethod
+    def slice_again(first_slice, max_val):
+        second_slice = random.randint(0, max_val)
+        while second_slice == first_slice:
+            second_slice = random.randint(0, max_val)
+
+        return second_slice
+
+
+def get_people(raw_text):
+    people = re.findall(r"[\w']+", raw_text)
+    return people
+
+
+def generate_pairs(people_string):
+    slicer = Slicer()
+    filling = PearFilling(slicer)
+    available_people = get_people(people_string)
+    pairs = filling.create_pairs(available_people, [])
+    return pairs
