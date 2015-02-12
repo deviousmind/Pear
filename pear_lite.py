@@ -19,17 +19,14 @@ class PearFilling():
 
     def generate_compatible_pairs(self, available_people, cannot_pairs):
         paired = False
-        number_people = len(available_people)
-        max_pairs = number_people // 2
-        max_combinations = self.calculate_combinations(number_people)
-        pairs_tried = 0
         pairs = []
-        while not paired and pairs_tried < max_combinations:
+        attempts = 0
+        max_attempts = self.calculate_combinations(len(available_people))
+        while not paired and attempts < max_attempts:
             people = list(available_people)
-            pairs = self.grow_pairs(people, max_pairs)
+            pairs = self.grow_pairs(people)
             paired = self.ripen_pairs(pairs, cannot_pairs)
-            if not paired:
-                pairs_tried += 1
+            attempts += 1
 
         return pairs
 
@@ -45,8 +42,9 @@ class PearFilling():
 
         return True
 
-    def grow_pairs(self, people, max_pairs):
+    def grow_pairs(self, people):
         pairs = []
+        max_pairs = len(people) // 2
         for pair in range(max_pairs):
             self.add_pair_to_list(pairs, people)
 
@@ -80,6 +78,7 @@ class PearFilling():
     @staticmethod
     def calculate_combinations(total):
         # n! / ( r! (n - r)! )
+        # two people make a pair, so r = 2, n = number in pool
         total_fac = math.factorial(total)
         others_chosen = 2
         pair_fac = math.factorial(others_chosen)
@@ -109,9 +108,9 @@ def get_people(raw_text):
     return people
 
 
-def generate_pairs(people_string):
+def generate_pairs(people_string, old_pairs):
     slicer = Slicer()
     filling = PearFilling(slicer)
     available_people = get_people(people_string)
-    pairs = filling.create_pairs(available_people, [])
+    pairs = filling.create_pairs(available_people, old_pairs)
     return pairs
